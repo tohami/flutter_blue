@@ -49,14 +49,9 @@ public class ProtoMaker {
         p.setDevice(from(device));
         Protos.AdvertisementData.Builder a = Protos.AdvertisementData.newBuilder();
         ScanRecord scanRecord = scanResult.getScanRecord();
-        if(Build.VERSION.SDK_INT >= 26) {
-            a.setConnectable(scanResult.isConnectable());
-        } else {
-            if(scanRecord != null) {
-                int flags = scanRecord.getAdvertiseFlags();
-                a.setConnectable((flags & 0x2) > 0);
-            }
-        }
+        int flags = scanRecord.getAdvertiseFlags();
+        a.setConnectable((flags & 0x2) == 2);
+
         if(scanRecord != null) {
             String deviceName = scanRecord.getDeviceName();
             if(deviceName != null) {
