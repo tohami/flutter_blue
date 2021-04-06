@@ -50,7 +50,7 @@ public class ProtoMaker {
         Protos.AdvertisementData.Builder a = Protos.AdvertisementData.newBuilder();
         ScanRecord scanRecord = scanResult.getScanRecord();
         int flags = scanRecord.getAdvertiseFlags();
-        a.setConnectable((flags & 0x2) == 2);
+        a.setConnectable((flags & 0x2) == 2 || (flags & 0x1) == 1);
 
         if(scanRecord != null) {
             String deviceName = scanRecord.getDeviceName();
