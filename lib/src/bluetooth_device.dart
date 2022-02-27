@@ -7,11 +7,13 @@ part of flutter_blue;
 class BluetoothDevice {
   final DeviceIdentifier id;
   final String name;
+  final bool isBounded ;
   final BluetoothDeviceType type;
 
   BluetoothDevice.fromProto(protos.BluetoothDevice p)
       : id = new DeviceIdentifier(p.remoteId),
         name = p.name,
+        isBounded = p.isPaired ,
         type = BluetoothDeviceType.values[p.type.value];
 
   BehaviorSubject<bool> _isDiscoveringServices = BehaviorSubject.seeded(false);
