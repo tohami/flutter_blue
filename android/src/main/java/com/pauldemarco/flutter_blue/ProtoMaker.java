@@ -95,6 +95,7 @@ public class ProtoMaker {
         if(name != null) {
             p.setName(name);
         }
+        p.setIsPaired(device.getBondState() == BluetoothDevice.BOND_BONDED);
         switch(device.getType()){
             case BluetoothDevice.DEVICE_TYPE_LE:
                 p.setType(Protos.BluetoothDevice.Type.LE);
