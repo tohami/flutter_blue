@@ -4,6 +4,7 @@
 
 #import "FlutterBluePlugin.h"
 #import "Flutterblue.pbobjc.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
 @interface CBUUID (CBUUIDAdditionsFlutterBlue)
 - (NSString *)fullUUIDString;
@@ -578,6 +579,17 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
   ProtosAdvertisementData *ads = [[ProtosAdvertisementData alloc] init];
   [ads setConnectable:[advertisementData[CBAdvertisementDataIsConnectable] boolValue]];
   [ads setLocalName:advertisementData[CBAdvertisementDataLocalNameKey]];
+
+  NSLog(@"CBAdvertisementDataLocalNameKey: %@", advertisementData[CBflag]);
+  NSLog(@"CBAdvertisementDataIsConnectable: %@", advertisementData[CBAdvertisementDataIsConnectable]);
+  NSLog(@"CBAdvertisementDataTxPowerLevelKey: %@", advertisementData[CBAdvertisementDataTxPowerLevelKey]);
+  NSLog(@"CBAdvertisementDataServiceDataKey: %@", advertisementData[CBAdvertisementDataServiceDataKey]);
+  NSLog(@"CBAdvertisementDataOverflowServiceUUIDsKey: %@", advertisementData[CBAdvertisementDataOverflowServiceUUIDsKey]);
+  NSLog(@"CBAdvertisementDataSolicitedServiceUUIDsKey: %@", advertisementData[CBAdvertisementDataSolicitedServiceUUIDsKey]);
+  NSLog(@"CBAdvertisementDataManufacturerDataKey: %@", advertisementData[CBAdvertisementDataManufacturerDataKey]);
+  NSLog(@"CBPeripheralManagerRestoredStateAdvertisementDataKey: %@", advertisementData[CBPeripheralManagerRestoredStateAdvertisementDataKey]);
+    
+
   // Tx Power Level
   NSNumber *txPower = advertisementData[CBAdvertisementDataTxPowerLevelKey];
   if(txPower != nil) {
