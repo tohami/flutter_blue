@@ -82,8 +82,7 @@ class FindDevicesScreen extends StatelessWidget {
                     .asyncMap((_) => FlutterBlue.instance.connectedDevices),
                 initialData: [],
                 builder: (c, snapshot) => Column(
-                  children: snapshot.data
-                      .map((d) => ListTile(
+                  children: snapshot.data?.map((d) => ListTile(
                             title: Text(d.name),
                             subtitle: Text(d.id.toString()),
                             trailing: StreamBuilder<BluetoothDeviceState>(
@@ -92,7 +91,7 @@ class FindDevicesScreen extends StatelessWidget {
                               builder: (c, snapshot) {
                                 if (snapshot.data ==
                                     BluetoothDeviceState.connected) {
-                                  return RaisedButton(
+                                  return TextButton(
                                     child: Text('OPEN'),
                                     onPressed: () => Navigator.of(context).push(
                                         MaterialPageRoute(
@@ -103,8 +102,7 @@ class FindDevicesScreen extends StatelessWidget {
                                 return Text(snapshot.data.toString());
                               },
                             ),
-                          ))
-                      .toList(),
+                          ))?.toList()??[],
                 ),
               ),
               StreamBuilder<List<ScanResult>>(
@@ -143,7 +141,8 @@ class FindDevicesScreen extends StatelessWidget {
             return FloatingActionButton(
                 child: Icon(Icons.search),
                 onPressed: () => FlutterBlue.instance
-                    .startScan(timeout: Duration(seconds: 4)));
+                    .startScan(withServices: [Guid("8ec90001-f315-4f60-9fb8-838830daea50")],
+                    allowDuplicates: true));
           }
         },
       ),
@@ -227,7 +226,7 @@ class DeviceScreen extends StatelessWidget {
                   text = snapshot.data.toString().substring(21).toUpperCase();
                   break;
               }
-              return FlatButton(
+              return TextButton(
                   onPressed: onPressed,
                   child: Text(
                     text,

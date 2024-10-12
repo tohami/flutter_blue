@@ -90,10 +90,8 @@ class ScanResultTile extends StatelessWidget {
     return ExpansionTile(
       title: _buildTitle(context),
       leading: Text(result.rssi.toString()),
-      trailing: RaisedButton(
+      trailing: TextButton(
         child: Text('CONNECT'),
-        color: Colors.black,
-        textColor: Colors.white,
         onPressed: (result.device.isBounded??false) ? onTap : null,
       ),
       children: <Widget>[
